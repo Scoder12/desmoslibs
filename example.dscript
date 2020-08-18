@@ -1,0 +1,53 @@
+# Welcome to DesmosScript!
+# Lines that start with # are comments
+# blank lines and spaces before and after data are ignored
+
+# Lines that start with " are notes (text fields in graph)
+" Compiled with DesmosScript
+
+# This commands makes the expressions after it inside a folder
+# You can replace folder-closed with just folder if you want it to be open
+# The data after the folder command is the name of the folder
+folder-closed The code
+    # The indent inside here is completely optional. All lines are stripped.
+
+    # If statements are in the form of 
+    # (if (<condition>) then <value if true> else <value if false>)
+    # they are compiled into desmos piecewise statements in the form of 
+    #  {<cond>:<value if true>,<value if false>}
+    # ending a line with \ continues it onto the next line
+    a = (if (c = 1) \
+        then 1 else 0)
+
+    # multi letter variables and functions are automatically converted
+    abc = 1
+    # but builtin functions are ignored
+    y = sin(x)
+
+    # You can use "<conda> and <condb>" and "<conda> or <condb>" statements
+    # They automatically generate more complex conditions
+    dbc = (if (a = 1 and b = 1) then 1 else 0)
+
+    # If you want more complex condition then that, you can set a variable
+    #  or nest an if statement in one of the true or false values
+    y = (if (c = 1 or dbc = 1) then 1 else 0)
+
+    # a statement starting with 'color' sets the color for statements after it
+    #  if you don't set it, it defaults to black
+    # Using this, you can use any color and aren't limited to 6 like in the real calculator
+    color #0000ff
+    y = 2x
+
+    # A slider statement affects the previous expression
+    a1 = 1
+    # Usage: slider <min> to <max> [loop mode] [@<speed>x] [step <step>] [playing]
+    # Following statement sets up a slider that goes from 0 to 1,
+    #  plays only once, plays at 2 times speed, and with a step of 0.5
+    slider 0 to 1 once @2x step 0.5
+
+# the endfolder command sets to folder to none
+#  its not required if you're ending the script or setting the folder
+#  to a new one
+endfolder
+
+# Happy graphing!
