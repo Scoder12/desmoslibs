@@ -1,4 +1,4 @@
-# This is a comment. These next two lines are text cells that appear in the graph:
+# For a more basic introduction, see example.dscript. This file doesn't explain things as much.
 " Compiled with DesmosScript https://github.com/Scoder12/desmoslibs
 " This is an example of animation with desmos
 " its a line that you control the direction of and stays with 0 and 5
@@ -21,8 +21,8 @@ slider alinex to alinex playing
 linex~0
 
 # this is the variable thats controlling the animation
-#  I could have done the bounds use max/min statements but
-#  it would vibrate and I want to demonstrate nested if statements
+#  I could have done the bounds using max/min statements but
+#  it would vibrate more and I want to demonstrate nested if statements
 alinex = |if (start = 1) then \
                 |if (einex <= 0 and direction = -1) then 0 else \
                     |if (einex >= 5 and direction = 1) then 5 else \
