@@ -1,0 +1,36 @@
+# This is a comment. These next two lines are text cells that appear in the graph:
+" Compiled with DesmosScript https://github.com/Scoder12/desmoslibs
+" This is an example of animation with desmos
+" its a line that you control the direction of and stays with 0 and 5
+
+# First, a control to stop and start the animation
+start = 0
+slider 0 to 1 step 1
+# and a direction control
+direction = 0
+slider -1 to 1 step 1
+
+folder Internals
+# Next: The variable we want to animate
+linex = 0
+# and a slider that syncs it to the real variable thats changing
+slider alinex to alinex playing
+
+# Do a regression by 0 to create a duplicate variable, einex
+#  This prevents circular dependency errors
+linex~0
+
+# this is the variable thats controlling the animation
+#  I could have done the bounds use max/min statements but
+#  it would vibrate and I want to demonstrate nested if statements
+alinex = |if (start = 1) then \
+                |if (einex <= 0 and direction = -1) then 0 else \
+                    |if (einex >= 5 and direction = 1) then 5 else \
+                            einex+direction*0.01 \
+                    | \
+                | \
+            else 0|
+
+# draw a line to show the animation
+color #ff0000
+x = linex
