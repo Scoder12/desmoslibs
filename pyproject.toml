@@ -1,0 +1,15 @@
+[build-system]
+build-backend = "poetry.masonry.api"
+requires = ["poetry>=0.12"]
+
+[tool]
+[tool.poetry]
+authors = ["Scoder12"]
+description = "Code for interacting with desmos."
+name = "desmoslibs"
+version = "0.1.0"
+[tool.poetry.dependencies]
+python = "^3.7"
+regex = "^2020.2"
+requests = "^2.24.0"
+[tool.poetry.dev-dependencies]
