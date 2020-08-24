@@ -462,4 +462,12 @@ def compile_file(inf, outf, write_tex=False, randseed=None):
 
 
 if __name__ == "__main__":
-    compile_file("test.dscript", "test.djson")
+    if len(sys.argv) < 2:
+        print(f"Usage: {sys.argv[0]} <infile> [outfile]")
+    inf = sys.argv[1]
+    if len(sys.argv) > 2:
+        out = sys.argv[2]
+    else:
+        parts = inf.split('.')
+        out = '.'.join(parts[:-1] if len(parts) > 1 else parts) + '.djson'
+    compile_file(inf, outf)
