@@ -225,6 +225,23 @@ class Slider(PrefixedStatement):
         return True
 
 
+class Draggable(PrefixedStatement):
+    PREFIX = "draggable"
+
+    VALID_TYPES = ["X", "Y", "XY", "NONE"]
+
+    @classmethod
+    def process(cls, graph, l):
+        args = l.split(" ")
+        if len(args) < 2:
+            graph.warn("Expected draggable type")
+        drag_mode = args[1]
+        if drag_mode not in cls.VALID_TYPES:
+            graph.warn(f"Invalid draggable type, must be one of {', '.join(cls.VALID_TYPES)}")
+        # TODO: check if last is a point, maybe separate point expression that contains the default drag mode (NONE)
+        graph.explist[-1]["dragMode"] = drag_mode
+
+
 class Folder(PrefixedStatement):
     PREFIX = "folder"
 
