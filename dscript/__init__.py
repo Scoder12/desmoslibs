@@ -173,7 +173,7 @@ class Slider(PrefixedStatement):
 
     LOOP_DIRECTIONS = {
         "back_and_forth": None,
-        "fwd": ("loopMod", "LOOP_FORWARD"),
+        "fwd": ("loopMode", "LOOP_FORWARD"),
         "once": ("newLoopMode", "PLAY_ONCE"),
     }
 

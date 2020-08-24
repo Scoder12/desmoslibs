@@ -14,7 +14,7 @@ def shell():
 
 
 def process(script):
-    with open(script, 'r') as f:
+    with open(script, "r") as f:
         code = f.read()
 
     print("Compiling...")
@@ -22,9 +22,15 @@ def process(script):
     if len(sys.argv) > 2:
         graph_hash = sys.argv[2]
     else:
-        graph_hash = input("Enter graph hash to upload to (can be passed on command line as 3rd arg): ")
-    username = os.getenv("DESMOS_USER") or input("Desmos Username (can be passed in DESMOS_USER environment variable): ")
-    password = os.getenv("DESMOS_PASS") or getpass("Desmos Password (can be passed in DESMOS_PASS environment variable): ")
+        graph_hash = input(
+            "Enter graph hash to upload to (can be passed on command line as 3rd arg): "
+        )
+    username = os.getenv("DESMOS_USER") or input(
+        "Desmos Username (can be passed in DESMOS_USER environment variable): "
+    )
+    password = os.getenv("DESMOS_PASS") or getpass(
+        "Desmos Password (can be passed in DESMOS_PASS environment variable): "
+    )
     print("Logging in...")
     c = DesmosClient()
     c.login(username, password)
