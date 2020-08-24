@@ -1,5 +1,6 @@
 import os
 from getpass import getpass
+import sys
 
 import dscript
 from client import DesmosClient
