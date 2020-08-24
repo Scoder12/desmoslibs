@@ -2,7 +2,7 @@ import os
 from getpass import getpass
 
 import dscript
-from client import 
+from client import DesmosClient
 
 
 def shell():
