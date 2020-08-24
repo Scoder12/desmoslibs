@@ -237,7 +237,7 @@ class Folder(PrefixedStatement):
         else:
             graph.warn(
                 f"Syntax Error: 'folder' statement must start with 'folder '"
-                " or 'folder closed ', ignoring"
+                " or 'folder-closed ', ignoring"
             )
             return True
 
