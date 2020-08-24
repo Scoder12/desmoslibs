@@ -468,6 +468,6 @@ if __name__ == "__main__":
     if len(sys.argv) > 2:
         out = sys.argv[2]
     else:
-        parts = inf.split('.')
-        out = '.'.join(parts[:-1] if len(parts) > 1 else parts) + '.djson'
+        parts = inf.split(".")
+        out = ".".join(parts[:-1] if len(parts) > 1 else parts) + ".djson"
     compile_file(inf, outf)
