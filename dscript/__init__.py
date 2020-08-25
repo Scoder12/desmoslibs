@@ -25,6 +25,10 @@ STANDARD_LIBRARY = {
         r"s_{liceb}\left(a,s_{tart},e_{nd}\right)=s_{licea}\left(a,\left[1,...,e_{nd}-s_{tart}+1\right],s_{tart}\right)",
         r"s_{lice}\left(a,s_{tart},e_{nd}\right)=s_{liceb}\left(a,\left\{s_{tart}<0:\operatorname{length}\left(a\right)+s_{tart}+1,s_{tart}\right\},\left\{e_{nd}<0:\operatorname{length}\left(a\right)+e_{nd}+1,e_{nd}\right\}\right)",
     ],
+    "fill": [
+      r"f_{illa}\left(r_{angefill},v_{fill}\right)=\sum_{n=r_{angefill}}^{r_{angefill}}v_{fill}",
+      r"f_{ill}\left(l_{enfill},v_{fill}\right)=f_{illa}\left(\left[1,...l_{enfill}\right],v_{fill}\right)"
+    ]
 }
 
 
