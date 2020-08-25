@@ -27,12 +27,12 @@ STANDARD_LIBRARY = {
     ],
     "fill": [
         r"f_{illa}\left(r_{angefill},v_{fill}\right)=\sum_{n=r_{angefill}}^{r_{angefill}}v_{fill}",
-        r"f_{ill}\left(l_{enfill},v_{fill}\right)=f_{illa}\left(\left[1,...l_{enfill}\right],v_{fill}\right)"
+        r"f_{ill}\left(l_{enfill},v_{fill}\right)=f_{illa}\left(\left[1,...l_{enfill}\right],v_{fill}\right)",
     ],
     "assign": [
         r"a_{ssigna}\left(l_{asn},i_{asn},v_{asn},t_{asn}\right)=\sum_{n=t_{asn}}^{t_{asn}}\left\{i_{asn}=n:v_{asn},l_{asn}\left[n\right]\right\}"
         r"a_{ssign}\left(l_{asn},i_{asn},v_{asn}\right)=a_{ssigna}\left(l_{asn},i_{asn},v_{asn},\left[1,...,\operatorname{length}\left(l_{asn}\right)\right]\right)",
-    ]
+    ],
 }
 
 
@@ -76,7 +76,7 @@ def convert_to_latex(st):
         (
             lambda m: m.group(3) + "_{" + m.group(4) + "}"
             if m.group(4)
-            else (m.group(1) or r'\operatorname{' + m.group(2) + '}')
+            else (m.group(1) or r"\operatorname{" + m.group(2) + "}")
         ),
         st,
     )
@@ -245,7 +245,9 @@ class Draggable(PrefixedStatement):
             graph.warn("Expected draggable type")
         drag_mode = args[1]
         if drag_mode not in cls.VALID_TYPES:
-            graph.warn(f"Invalid draggable type, must be one of {', '.join(cls.VALID_TYPES)}")
+            graph.warn(
+                f"Invalid draggable type, must be one of {', '.join(cls.VALID_TYPES)}"
+            )
         # TODO: check if last is a point, maybe separate point expression that contains the default drag mode (NONE)
         graph.explist[-1]["dragMode"] = drag_mode
 
@@ -266,19 +268,19 @@ class LabelOptions(PrefixedStatement):
     PREFIX = "labelopts"
 
     opts = {
-      'hidden': ('hidden', True),
-      **{d: ('labelOrientation', d) for d in ['left', 'right', 'above', 'below']}
+        "hidden": ("hidden", True),
+        **{d: ("labelOrientation", d) for d in ["left", "right", "above", "below"]},
     }
 
     @classmethod
     def process(cls, graph, l):
         args = l.split(" ")
         for a in args:
-          if a in opts:
-              k, v = opts[a]
-              graph.explist[-1][k] = v
-          else:
-              graph.warn(f"Unrecognized label option {a}, ignoring")
+            if a in opts:
+                k, v = opts[a]
+                graph.explist[-1][k] = v
+            else:
+                graph.warn(f"Unrecognized label option {a}, ignoring")
 
 
 class Folder(PrefixedStatement):
