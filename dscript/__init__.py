@@ -262,6 +262,25 @@ class Label(PrefixedStatement):
         graph.explist[-1]["label"] = args[1]
 
 
+class LabelOptions(PrefixedStatement):
+    PREFIX = "labelopts"
+
+    opts = {
+      'hidden': ('hidden', True),
+      **{d: ('labelOrientation', d) for d in ['left', 'right', 'above', 'below']}
+    }
+
+    @classmethod
+    def process(cls, graph, l):
+        args = l.split(" ")
+        for a in args:
+          if a in opts:
+              k, v = opts[a]
+              graph.explist[-1][k] = v
+          else:
+              graph.warn(f"Unrecognized label option {a}, ignoring")
+
+
 class Folder(PrefixedStatement):
     PREFIX = "folder"
 
@@ -386,6 +405,9 @@ class DesmosScript:
         Color,
         Bounds,
         Slider,
+        Draggable,
+        Label,
+        LabelOptions,
         Folder,
         EndFolder,
         Include,
