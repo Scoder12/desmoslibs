@@ -267,7 +267,7 @@ class Label(PrefixedStatement):
 class LabelOptions(PrefixedStatement):
     PREFIX = "labelopts"
 
-    opts = {
+    OPTIONS = {
         "hidden": ("hidden", True),
         **{d: ("labelOrientation", d) for d in ["left", "right", "above", "below"]},
     }
@@ -276,7 +276,7 @@ class LabelOptions(PrefixedStatement):
     def process(cls, graph, l):
         args = l.split(" ")
         for a in args:
-            if a in opts:
+            if a in cls.OPTIONS:
                 k, v = opts[a]
                 graph.explist[-1][k] = v
             else:
