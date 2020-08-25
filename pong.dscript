@@ -1,3 +1,15 @@
 " Pong in desmos, by Scoder12
 " Compiled with DesmosScript https://github.com/Scoder12/desmoslibs
 
+folder-closed Internals
+
+" Rectangle function
+r(x, y, w, h) = [(x,y),(x,y+h),(x+w,y+h),(x+w,y),(x,y)]
+
+" Outline of playing area
+color #000000
+polygon(r(0, -0.5, 15, 10))
+
+endfolder
+
+append

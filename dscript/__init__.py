@@ -76,7 +76,7 @@ def convert_to_latex(st):
         (
             lambda m: m.group(3) + "_{" + m.group(4) + "}"
             if m.group(4)
-            else (m.group(1) or m.group(2))
+            else (m.group(1) or r'\operatorname{' + m.group(2) + '}')
         ),
         st,
     )
