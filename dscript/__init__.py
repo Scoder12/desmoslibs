@@ -250,6 +250,18 @@ class Draggable(PrefixedStatement):
         graph.explist[-1]["dragMode"] = drag_mode
 
 
+class Label(PrefixedStatement):
+    PREFIX = "label"
+
+    @staticmethod
+    def process(graph, l):
+        args = l.split(" ")
+        if len(args) < 2:
+            graph.warn("Expected label value")
+        graph.explist[-1]["showLabel"] = True
+        graph.explist[-1]["label"] = args[1]
+
+
 class Folder(PrefixedStatement):
     PREFIX = "folder"
 
