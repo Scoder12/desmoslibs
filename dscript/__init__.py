@@ -261,7 +261,7 @@ class Label(PrefixedStatement):
         if len(args) < 2:
             graph.warn("Expected label value")
         graph.explist[-1]["showLabel"] = True
-        graph.explist[-1]["label"] = args[1]
+        graph.explist[-1]["label"] = ' '.join(args[1:])
 
 
 class LabelOptions(PrefixedStatement):
