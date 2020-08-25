@@ -275,9 +275,9 @@ class LabelOptions(PrefixedStatement):
     @classmethod
     def process(cls, graph, l):
         args = l.split(" ")
-        for a in args:
+        for a in args[1:]:
             if a in cls.OPTIONS:
-                k, v = opts[a]
+                k, v = cls.OPTIONS[a]
                 graph.explist[-1][k] = v
             else:
                 graph.warn(f"Unrecognized label option {a}, ignoring")
