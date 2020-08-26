@@ -254,6 +254,14 @@ class Draggable(PrefixedStatement):
         return True
 
 
+class Hidden(PrefixedStatement):
+    PREFIX = "hidden"
+
+    @staticmethod
+    def process(graph, l):
+        graph.explist[-1]["hidden"] = True
+
+
 class Label(PrefixedStatement):
     PREFIX = "label "
 
@@ -271,8 +279,7 @@ class LabelOptions(PrefixedStatement):
     PREFIX = "labelopts "
 
     OPTIONS = {
-        "hidden": ("hidden", True),
-        **{d: ("labelOrientation", d) for d in ["left", "right", "above", "below"]},
+      d: ("labelOrientation", d) for d in ["left", "right", "above", "below"]
     }
 
     @classmethod
