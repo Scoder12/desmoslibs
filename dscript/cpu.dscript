@@ -1,0 +1,153 @@
+" CPU in desmos
+ybounds -4, 10
+
+reset = 0
+slider 0 to 1 step 1
+
+" Current instruction pointer as an index of prog
+loc = 0
+# slider -1 to length(prog)-1 step 2
+slider getloc(0) to getloc(0) playing
+
+" Register values
+rga = 0
+slider gs(0) to gs(0) playing
+rgb = 0
+slider gs(1) to gs(1) playing
+rgc = 0
+slider gs(2) to gs(2) playing
+rgd = 0
+slider gs(3) to gs(3) playing
+rge = 0
+slider gs(4) to gs(4) playing
+
+" Instructions:
+" Defined as [ins1, arg1, ..., insn, argn]
+# -1: No operation (NOP)
+" 0: assign arg to register a
+" 1: assign arg to register b
+" 2: assign arg to register c
+" 3: assign arg to register d
+" 4: assign arg to register e
+" 5: Set all registers to the value of the given register
+" 6: Takes 3 register ids as args and adds the first two writing into the third
+" A simple program to add 1 + 1
+prog = [ \
+  -1, \ # padding
+  0, 1,       \ # a = 1
+  1, 1,       \ # b = 2
+  6, 0, 1, 2, \ # c = a + b
+  -1 \ # padding
+]
+
+" Return amount to increment instruction pointer. 
+" List has the amount of args each instruction takes
+getinc(ins) = |if (ins = -1) then 1 else [ \
+  1, \ # set a
+  1, \ # set b
+  1, \ # set c
+  1, \ # set d
+  1, \ # set e
+  1, \ # set all
+  3  \ # add
+][ins + 1] + 1|
+hidden
+
+" Get current value of register n by converting register index to eg* value
+gr(reg) = [ega[1], egb[1], egc[1], egd[1], ege[1]][reg + 1]
+hidden
+
+" Get the nth arg
+arg(n) = prog[loc + n]
+hidden
+" Get the register pointed to by the nth arg
+rarg(n) = gr(arg(n))
+hidden
+
+loada(reg) = |if (reg = 0) then arg(1)| # else gr(reg)|
+hidden
+loadb(reg) = |if (reg = 1) then arg(1)| # else gr(reg)|
+hidden
+loadc(reg) = |if (reg = 2) then arg(1)| # else gr(reg)|
+hidden
+loadd(reg) = |if (reg = 3) then arg(1)| # else gr(reg)|
+hidden
+loade(reg) = |if (reg = 4) then arg(1)| # else gr(reg)|
+hidden
+seta(reg) = rarg(1)
+hidden
+add(reg) = |if (reg = prog[loc + 3]) then rarg(1) + rarg(2)|
+hidden
+
+" Find the correct instruction function and call it
+execins(reg, ins) = |if (ins = -1) then gr(reg) else \
+  |if (ins = 0) then loada(reg) else \
+    |if (ins = 1) then loadb(reg) else \
+      |if (ins = 2) then loadc(reg) else \
+        |if (ins = 3) then loadd(reg) else \
+          |if (ins = 4) then loade(reg) else \
+            |if (ins = 5) then seta(reg) else \
+                |if (ins = 6) then add(reg) else -9| \
+            | \
+          | \
+        | \
+      | \
+    | \
+  | \
+|
+
+" If the instruction returns undefined, it means that its not setting a new value
+" val=val is a simple check for undefined (undefined doesn't equal itself)
+checkval(reg, newval) = |if (newval = newval) then newval else gr(reg)|
+
+gs(reg) = |if (reset = 1) then 0 else \
+  |if (0 < loc <= length(prog)) then checkval(reg, execins(reg, prog[loc])) else 0| \
+|
+hidden
+
+checkloc(locv) = |if (locv > length(prog)) then length(prog) else locv|
+hidden
+getloc(ignored) = |if (reset = 1) then 1 else \
+  |if (eoc[1] = 0) then 1 else checkloc(eoc[1] + getinc(prog[eoc[1]]))| \
+|
+hidden
+
+" Regression by zero trick to depend on self
+loc~0
+rga~0
+rgb~0
+rgc~0
+rgd~0
+rge~0
+
+" Labels
+(1, 7)
+label Register A (0): ${r_ga}
+labelopts right
+
+(1, 5)
+label Register B (1): ${r_gb}
+labelopts right
+
+(1, 3)
+label Register C (2): ${r_gc}
+labelopts right
+
+(1, 1)
+label Register D (3): ${r_gd}
+labelopts right
+
+
+(1, -1)
+label Register E (4): ${r_ge}
+labelopts right
+
+getinsforlbl(temp) = prog[loc]
+hidden
+
+insforlbl = 0
+slider getinsforlbl(1) to getinsforlbl(1) playing
+
+(4, 7)
+label Current Instruction: ${i_nsforlbl}
+labelopts right
