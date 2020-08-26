@@ -165,7 +165,7 @@ class Bounds(Statement):
     def process(graph, l):
         args = l.split(" ")
         axe = l[0]  # x or y
-        bounds = args[1]
+        bounds = ' '.join(args[1:])
         newviewport = graph.viewport.copy()
         try:
             vmin, vmax = bounds.split(",")
@@ -260,6 +260,7 @@ class Hidden(PrefixedStatement):
     @staticmethod
     def process(graph, l):
         graph.explist[-1]["hidden"] = True
+        return True
 
 
 class Label(PrefixedStatement):
