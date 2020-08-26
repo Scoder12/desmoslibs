@@ -37,7 +37,8 @@ STANDARD_LIBRARY = {
 
 
 def make_cond(cond, trueres, falseres):
-    return "{" + cond + ":" + trueres + "," + falseres + "}"
+    falseres = ',' + falseres if falseres else ''
+    return "{" + cond + ":" + trueres + falseres + "}"
 
 
 def make_and_exp(conda, condb, trueres, falseres):
@@ -363,7 +364,7 @@ class Expression(Statement):
     def parse(graph, l):
         did_match = True
         sub = lambda s: regex.sub(
-            r"\|if(?: ?)\((.+?)\)(?: ?)then(?: ?)(?:((?R))|(.+?))(?: else )(?:((?R))|(.+))\|",
+            r"\|if(?: ?)\((.+?)\)(?: ?)then(?: ?)(?:((?R))|(.+?))(?:(?: else )(?:((?R))|(.+)))?\|",
             replace_ifs,
             s,
         )
@@ -458,7 +459,7 @@ class DesmosScript:
         last = ""
         for ln, l in enumerate(data.split("\n")):
             self.lineno = ln + 1
-            l = l.strip()
+            l = l.split("#")[0].strip()
             if l.endswith("\\"):
                 last += l[:-1]
                 # print("last:", last)
