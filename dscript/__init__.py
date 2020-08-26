@@ -254,7 +254,7 @@ class Draggable(PrefixedStatement):
 
 
 class Label(PrefixedStatement):
-    PREFIX = "label"
+    PREFIX = "label "
 
     @staticmethod
     def process(graph, l):
@@ -267,7 +267,7 @@ class Label(PrefixedStatement):
 
 
 class LabelOptions(PrefixedStatement):
-    PREFIX = "labelopts"
+    PREFIX = "labelopts "
 
     OPTIONS = {
         "hidden": ("hidden", True),
