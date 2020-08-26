@@ -458,7 +458,7 @@ class DesmosScript:
         last = ""
         for ln, l in enumerate(data.split("\n")):
             self.lineno = ln + 1
-            l = l.strip()
+            l = l.split("#")[0].strip()
             if l.endswith("\\"):
                 last += l[:-1]
                 # print("last:", last)
