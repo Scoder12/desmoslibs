@@ -250,6 +250,7 @@ class Draggable(PrefixedStatement):
             )
         # TODO: check if last is a point, maybe separate point expression that contains the default drag mode (NONE)
         graph.explist[-1]["dragMode"] = drag_mode
+        return True
 
 
 class Label(PrefixedStatement):
@@ -262,6 +263,7 @@ class Label(PrefixedStatement):
             graph.warn("Expected label value")
         graph.explist[-1]["showLabel"] = True
         graph.explist[-1]["label"] = ' '.join(args[1:])
+        return True
 
 
 class LabelOptions(PrefixedStatement):
@@ -281,6 +283,7 @@ class LabelOptions(PrefixedStatement):
                 graph.explist[-1][k] = v
             else:
                 graph.warn(f"Unrecognized label option {a}, ignoring")
+        return True
 
 
 class Folder(PrefixedStatement):
