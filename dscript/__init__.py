@@ -419,6 +419,7 @@ class DesmosScript:
         Bounds,
         Slider,
         Draggable,
+        Hidden,
         Label,
         LabelOptions,
         Folder,
